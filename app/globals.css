@@ -1,0 +1,137 @@
+@import 'tailwindcss';
+@import 'tw-animate-css';
+
+@custom-variant dark (&:is(.dark *));
+
+:root {
+  /* Neutral palette */
+  --background: #faf8f5;
+  --foreground: #1a1a1a;
+  --card: #ffffff;
+  --card-foreground: #1a1a1a;
+  --popover: #ffffff;
+  --popover-foreground: #1a1a1a;
+  
+  /* Primary brand color */
+  --primary: #1a1a1a;
+  --primary-foreground: #faf8f5;
+  
+  /* Secondary & accents */
+  --secondary: #e8e4e0;
+  --secondary-foreground: #1a1a1a;
+  --muted: #d4d0cc;
+  --muted-foreground: #666666;
+  --accent: #c9a876;
+  --accent-foreground: #1a1a1a;
+  
+  /* Utilities */
+  --destructive: #dc2626;
+  --destructive-foreground: #faf8f5;
+  --border: #e8e4e0;
+  --input: #faf8f5;
+  --ring: #1a1a1a;
+  
+  /* Chart colors */
+  --chart-1: #c9a876;
+  --chart-2: #1a1a1a;
+  --chart-3: #d4d0cc;
+  --chart-4: #666666;
+  --chart-5: #e8e4e0;
+  
+  --radius: 0.5rem;
+  
+  /* Sidebar colors */
+  --sidebar: #ffffff;
+  --sidebar-foreground: #1a1a1a;
+  --sidebar-primary: #1a1a1a;
+  --sidebar-primary-foreground: #ffffff;
+  --sidebar-accent: #c9a876;
+  --sidebar-accent-foreground: #1a1a1a;
+  --sidebar-border: #e8e4e0;
+  --sidebar-ring: #1a1a1a;
+  
+  /* Font variables */
+  --font-sans: var(--font-sans), system-ui, sans-serif;
+  --font-serif: var(--font-serif), Georgia, serif;
+}
+
+.dark {
+  --background: #0a0a0a;
+  --foreground: #f0f0f0;
+  --card: #121212;
+  --card-foreground: #f0f0f0;
+  --popover: #121212;
+  --popover-foreground: #f0f0f0;
+  --primary: #ffffff;
+  --primary-foreground: #000000;
+  --secondary: #1e1e1e;
+  --secondary-foreground: #ffffff;
+  --muted: #2a2a2a;
+  --muted-foreground: #a1a1a1;
+  --accent: #d4af37;
+  --accent-foreground: #000000;
+  --destructive: #ef4444;
+  --destructive-foreground: #ffffff;
+  --border: #1e1e1e;
+  --input: #121212;
+  --ring: #ffffff;
+}
+
+@theme {
+  --color-border: var(--border);
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --font-sans: var(--font-sans);
+  --font-serif: var(--font-serif);
+  --radius: var(--radius);
+}
+
+html.lenis,
+html.lenis body {
+  height: auto;
+}
+
+.lenis-smooth {
+  scroll-behavior: auto !important;
+}
+
+.lenis-smooth [data-lenis-prevent] {
+  overscroll-behavior: contain;
+}
+
+.lenis-stopped {
+  overflow: hidden;
+}
+
+.lenis-scrolling iframe {
+  pointer-events: none;
+}
+
+@layer base {
+  html {
+    scroll-behavior: auto;
+  }
+  body {
+    @apply bg-background text-foreground;
+  }
+}
+
+@layer components {
+  .container-responsive {
+    @apply max-w-[1440px] mx-auto px-6 sm:px-10 lg:px-16 w-full;
+  }
+}
