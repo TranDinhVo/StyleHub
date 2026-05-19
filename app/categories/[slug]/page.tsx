@@ -55,9 +55,32 @@ export async function generateMetadata(
     return { title: 'Category Not Found' }
   }
 
+  // Fetch the first product image in this category to use as a high-quality social sharing banner
+  const products = getProductsByCategory(info.name)
+  const ogImage = products.length > 0 ? products[0].image : info.image
+
   return {
-    title: `${info.name} | StyleHub`,
+    title: `${info.name} | StyleHub - Premium Collection`,
     description: info.description,
+    openGraph: {
+      title: `${info.name} Collection | StyleHub`,
+      description: info.description,
+      images: [
+        {
+          url: ogImage,
+          width: 800,
+          height: 1000,
+          alt: `${info.name} Category Preview`,
+        }
+      ],
+      type: 'website',
+    },
+    twitter: {
+      card: 'summary_large_image',
+      title: `${info.name} Collection | StyleHub`,
+      description: info.description,
+      images: [ogImage],
+    }
   }
 }
 

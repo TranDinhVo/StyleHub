@@ -16,6 +16,7 @@ const cormorant = Cormorant_Garamond({
 })
 
 export const metadata: Metadata = {
+  metadataBase: new URL('https://stylehub.vercel.app'),
   title: 'StyleHub - Premium Fashion & Home Decor',
   description: 'Discover premium accessories, clothing, and home decor at StyleHub. Shop the latest trends with fast shipping and easy returns.',
   generator: 'v0.app',

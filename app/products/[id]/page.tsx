@@ -29,8 +29,27 @@ export async function generateMetadata(
   }
 
   return {
-    title: `${product.name} | StyleHub`,
+    title: `${product.name} | StyleHub - Premium Fashion`,
     description: product.description,
+    openGraph: {
+      title: `${product.name} | StyleHub`,
+      description: product.description,
+      images: [
+        {
+          url: product.image,
+          width: 800,
+          height: 1000,
+          alt: product.name,
+        }
+      ],
+      type: 'website',
+    },
+    twitter: {
+      card: 'summary_large_image',
+      title: `${product.name} | StyleHub`,
+      description: product.description,
+      images: [product.image],
+    }
   }
 }
 
@@ -44,8 +63,31 @@ export default async function ProductPage({ params }: PageProps) {
 
   const relatedProducts = getRelatedProducts(id, 4)
 
+  // Schema.org Structured Microdata (JSON-LD) for Google Rich Snippets
+  const jsonLd = {
+    '@context': 'https://schema.org',
+    '@type': 'Product',
+    name: product.name,
+    image: product.image,
+    description: product.description,
+    sku: product.id,
+    offers: {
+      '@type': 'Offer',
+      price: product.price,
+      priceCurrency: 'USD',
+      availability: 'https://schema.org/InStock',
+      url: `https://stylehub.app/products/${product.id}`
+    }
+  }
+
   return (
     <div className="min-h-screen">
+      {/* Google Rich Snippet Injection */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      />
+
       {/* Breadcrumb */}
       <section className="border-b border-border py-4">
         <div className="container-responsive mx-auto">
