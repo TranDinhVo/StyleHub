@@ -75,7 +75,7 @@ export default function Header() {
             {/* Cart Icon */}
             <Sheet open={cartOpen} onOpenChange={setCartOpen}>
               <SheetTrigger asChild>
-                <Button variant="ghost" size="icon" className="relative hover:bg-secondary rounded-full h-10 w-10">
+                <Button variant="ghost" size="icon" aria-label="Open Shopping Bag" className="relative hover:bg-secondary rounded-full h-10 w-10">
                   <ShoppingBag className="w-5 h-5" />
                   {itemCount > 0 && (
                     <span className="absolute -top-1 -right-1 bg-black text-white text-[10px] font-bold w-5 h-5 flex items-center justify-center rounded-full border-2 border-background">
@@ -92,7 +92,7 @@ export default function Header() {
             {/* Mobile Menu */}
             <Sheet open={mobileMenuOpen} onOpenChange={setMobileMenuOpen}>
               <SheetTrigger asChild className="lg:hidden">
-                <Button variant="ghost" size="icon" className="hover:bg-secondary rounded-full">
+                <Button variant="ghost" size="icon" aria-label="Open Menu" className="hover:bg-secondary rounded-full">
                   <Menu className="w-5 h-5" />
                 </Button>
               </SheetTrigger>

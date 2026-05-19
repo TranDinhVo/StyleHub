@@ -27,7 +27,7 @@ export default function CartDrawer({ onClose }: CartDrawerProps) {
       <div className="flex flex-col h-full">
         <div className="flex items-center justify-between p-6 border-b border-border">
           <h2 className="font-serif text-2xl font-bold">Shopping Bag</h2>
-          <button onClick={onClose} className="p-1 hover:bg-secondary rounded-full transition-colors">
+          <button onClick={onClose} aria-label="Close Shopping Bag" className="p-1 hover:bg-secondary rounded-full transition-colors">
             <X className="w-6 h-6" />
           </button>
         </div>
@@ -61,7 +61,7 @@ export default function CartDrawer({ onClose }: CartDrawerProps) {
     <div className="flex flex-col h-full">
       <div className="flex items-center justify-between p-6 border-b border-border">
         <h2 className="font-serif text-2xl font-bold">Shopping Bag ({items.length})</h2>
-        <button onClick={onClose} className="p-1 hover:bg-secondary rounded-full transition-colors">
+        <button onClick={onClose} aria-label="Close Shopping Bag" className="p-1 hover:bg-secondary rounded-full transition-colors">
           <X className="w-6 h-6" />
         </button>
       </div>
@@ -84,6 +84,7 @@ export default function CartDrawer({ onClose }: CartDrawerProps) {
                     <h3 className="font-bold text-sm line-clamp-1">{item.name}</h3>
                     <button 
                       onClick={() => removeItem(item.id)}
+                      aria-label={`Remove ${item.name} from bag`}
                       className="text-muted-foreground hover:text-red-500 transition-colors"
                     >
                       <X className="w-4 h-4" />
@@ -101,6 +102,7 @@ export default function CartDrawer({ onClose }: CartDrawerProps) {
                   <div className="flex items-center bg-secondary rounded-lg p-1">
                     <button
                       onClick={() => updateQuantity(item.id, item.quantity - 1)}
+                      aria-label="Decrease quantity"
                       className="w-7 h-7 flex items-center justify-center hover:bg-white rounded-md transition-all"
                     >
                       <Minus className="w-3 h-3" />
@@ -108,6 +110,7 @@ export default function CartDrawer({ onClose }: CartDrawerProps) {
                     <span className="w-8 text-center text-xs font-bold">{item.quantity}</span>
                     <button
                       onClick={() => updateQuantity(item.id, item.quantity + 1)}
+                      aria-label="Increase quantity"
                       className="w-7 h-7 flex items-center justify-center hover:bg-white rounded-md transition-all"
                     >
                       <Plus className="w-3 h-3" />
