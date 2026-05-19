@@ -31,7 +31,7 @@ const categories = [
 
 export default function CategoryShowcase() {
   return (
-    <section className="py-12 sm:py-16">
+    <section className="pt-12 pb-0 sm:pt-16 sm:pb-0">
       <div className="flex flex-col md:flex-row md:items-end justify-between mb-20 gap-8">
         <div className="max-w-3xl">
           <motion.span 
