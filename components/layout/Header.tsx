@@ -3,24 +3,18 @@
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import { Suspense, useState } from 'react'
-import { Menu, Search, ShoppingBag } from 'lucide-react'
+import { Menu, Search } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import { Sheet, SheetContent, SheetTrigger } from '@/components/ui/sheet'
 import MobileMenu from './MobileMenu'
-import CartDrawer from './CartDrawer'
 import ShopNavDropdown from './ShopNavDropdown'
-import { useCart } from '@/hooks/useCart'
 import { mainNavLinks, desktopNavLinkClass } from '@/lib/navigation'
 import { cn } from '@/lib/utils'
 
 export default function Header() {
   const pathname = usePathname()
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
-  const [cartOpen, setCartOpen] = useState(false)
   const [searchOpen, setSearchOpen] = useState(false)
-  const { items } = useCart()
-
-  const itemCount = items.reduce((sum, item) => sum + item.quantity, 0)
 
   const isActive = (href: string) =>
     pathname === href || (href !== '/' && pathname.startsWith(`${href}/`))
@@ -72,22 +66,7 @@ export default function Header() {
               />
             </div>
 
-            {/* Cart Icon */}
-            <Sheet open={cartOpen} onOpenChange={setCartOpen}>
-              <SheetTrigger asChild>
-                <Button variant="ghost" size="icon" aria-label="Open Shopping Bag" className="relative hover:bg-secondary rounded-full h-10 w-10">
-                  <ShoppingBag className="w-5 h-5" />
-                  {itemCount > 0 && (
-                    <span className="absolute -top-1 -right-1 bg-black text-white text-[10px] font-bold w-5 h-5 flex items-center justify-center rounded-full border-2 border-background">
-                      {itemCount}
-                    </span>
-                  )}
-                </Button>
-              </SheetTrigger>
-              <SheetContent side="right" className="w-full sm:max-w-md p-0">
-                <CartDrawer onClose={() => setCartOpen(false)} />
-              </SheetContent>
-            </Sheet>
+
 
             {/* Mobile Menu */}
             <Sheet open={mobileMenuOpen} onOpenChange={setMobileMenuOpen}>

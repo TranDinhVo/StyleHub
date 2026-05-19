@@ -4,8 +4,9 @@ import { motion, AnimatePresence } from 'framer-motion'
 import Image from 'next/image'
 import Link from 'next/link'
 import { useState } from 'react'
+import { useRouter } from 'next/navigation'
 import { Heart, Share2, Star, Truck, RotateCcw } from 'lucide-react'
-import { useWishlist, useCart } from '@/hooks/useCart'
+import { useWishlist } from '@/hooks/useCart'
 import { Button } from '@/components/ui/button'
 import { Badge } from '@/components/ui/badge'
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
@@ -16,27 +17,19 @@ interface ProductDetailProps {
 }
 
 export default function ProductDetail({ product }: ProductDetailProps) {
+  const router = useRouter()
   const [mainImage, setMainImage] = useState(product.image)
   const [selectedColor, setSelectedColor] = useState(product.colors?.[0])
   const [selectedSize, setSelectedSize] = useState(product.sizes?.[0])
   const [quantity, setQuantity] = useState(1)
   
   const { isInWishlist, addToWishlist, removeFromWishlist } = useWishlist()
-  const { addItem } = useCart()
   
   const inWishlist = isInWishlist(product.id)
 
-  const handleAddToCart = () => {
-    addItem({
-      productId: product.id,
-      name: product.name,
-      price: product.price,
-      originalPrice: product.originalPrice,
-      image: product.image,
-      quantity,
-      size: selectedSize,
-      color: selectedColor,
-    })
+  const handleBuyNow = () => {
+    const checkoutUrl = `/checkout?product=${product.id}&quantity=${quantity}${selectedSize ? `&size=${encodeURIComponent(selectedSize)}` : ''}${selectedColor ? `&color=${encodeURIComponent(selectedColor)}` : ''}`
+    router.push(checkoutUrl)
   }
 
   const handleWishlist = () => {
@@ -206,10 +199,10 @@ export default function ProductDetail({ product }: ProductDetailProps) {
                   </div>
                   <Button
                     size="lg"
-                    onClick={handleAddToCart}
+                    onClick={handleBuyNow}
                     className="flex-1 h-14 rounded-xl text-xs font-bold bg-black hover:bg-black/90 shadow-xl transition-all active:scale-95 tracking-widest uppercase"
                   >
-                    Add to Bag
+                    Buy Now
                   </Button>
                   <Button
                     variant="outline"

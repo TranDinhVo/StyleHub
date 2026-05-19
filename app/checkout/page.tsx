@@ -10,25 +10,34 @@ export default function CheckoutPage() {
   const router = useRouter()
 
   useEffect(() => {
+    // Safely parse query parameters on the client-side inside useEffect
+    const queryParams = new URLSearchParams(window.location.search)
+    const directProductId = queryParams.get('product')
+    const directQuantity = queryParams.get('quantity') || '1'
+
+    const WP_SITE = process.env.NEXT_PUBLIC_WORDPRESS_URL || 'https://stylehub-checkout.com'
+
+    // Scenario A: Direct Buy / No Cart
+    if (directProductId) {
+      const checkoutUrl = `${WP_SITE}/checkout/?add-to-cart=${directProductId}&quantity=${directQuantity}`
+      const redirectTimer = setTimeout(() => {
+        window.location.href = checkoutUrl
+      }, 1500)
+      return () => clearTimeout(redirectTimer)
+    }
+
+    // Scenario B: Fallback to Cart (if any remain)
     if (items.length === 0) {
-      // Redirect back to catalog if cart is empty
       const timer = setTimeout(() => {
         router.push('/products')
       }, 2000)
       return () => clearTimeout(timer)
     }
 
-    // Configure the WordPress base checkout URL
-    const WP_SITE = process.env.NEXT_PUBLIC_WORDPRESS_URL || 'https://stylehub-checkout.com'
-    
-    // Construct dynamic WooCommerce bulk add-to-cart parameters
-    // Format: site.com/checkout/?add-to-cart=ID1,ID2&quantity=QTY1,QTY2
     const ids = items.map(item => item.productId).join(',')
     const quantities = items.map(item => item.quantity).join(',')
-    
     const checkoutUrl = `${WP_SITE}/checkout/?add-to-cart=${ids}&quantity=${quantities}`
     
-    // Perform redirect after a brief premium transition delay
     const redirectTimer = setTimeout(() => {
       window.location.href = checkoutUrl
     }, 1500)
@@ -47,12 +56,10 @@ export default function CheckoutPage() {
 
         <div className="space-y-3">
           <h1 className="font-serif text-3xl font-bold tracking-tight text-black">
-            {items.length === 0 ? 'Your bag is empty' : 'Preparing Checkout'}
+            Preparing Checkout
           </h1>
           <p className="text-muted-foreground leading-relaxed max-w-sm mx-auto font-light">
-            {items.length === 0 
-              ? 'Redirecting you back to the products catalog...' 
-              : 'Securing your connection and redirecting you to our secure payment gateway on WordPress...'}
+            Securing your connection and redirecting you to our secure payment gateway on WordPress...
           </p>
         </div>
 
