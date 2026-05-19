@@ -25,7 +25,7 @@ const trustItems = [
 
 export default function TrustBar() {
   return (
-    <section className="py-20 border-y border-border">
+    <section className="py-12 border-y border-border">
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-12">
         {trustItems.map((item) => {
           const Icon = item.icon

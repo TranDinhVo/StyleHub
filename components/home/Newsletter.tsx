@@ -36,7 +36,7 @@ export default function Newsletter() {
   }
 
   return (
-    <section className="py-24 bg-black rounded-[2.5rem] text-white overflow-hidden relative">
+    <section className="py-16 bg-black rounded-[2.5rem] text-white overflow-hidden relative">
       {/* Decorative background elements */}
       <div className="absolute top-0 right-0 w-64 h-64 bg-white/5 rounded-full -translate-y-1/2 translate-x-1/2 blur-3xl"></div>
       <div className="absolute bottom-0 left-0 w-96 h-96 bg-white/5 rounded-full translate-y-1/2 -translate-x-1/2 blur-3xl"></div>

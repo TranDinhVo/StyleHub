@@ -26,7 +26,7 @@ export default function Home() {
       </section>
 
       {/* Main Content */}
-      <div className="container-responsive mx-auto space-y-32 py-24 sm:py-32">
+      <div className="container-responsive mx-auto space-y-16 py-12 sm:py-16">
         {/* Category Showcase */}
         <FadeIn>
           <CategoryShowcase />

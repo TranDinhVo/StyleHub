@@ -9,7 +9,7 @@ export default function FeaturedProducts() {
   const featuredProducts = mockProducts.filter(p => p.isFeatured).slice(0, 8)
 
   return (
-    <section className="py-24 sm:py-32">
+    <section className="py-12 sm:py-16">
       <div className="flex flex-col md:flex-row md:items-end justify-between mb-16 gap-6">
         <div className="max-w-2xl">
           <h2 className="font-serif text-4xl sm:text-6xl font-bold mb-6 tracking-tight">
